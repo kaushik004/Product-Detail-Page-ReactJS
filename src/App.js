@@ -8,8 +8,25 @@ import ProductData from './utils/ProductData';
 class App extends Component {
   state = {
     productData: ProductData,
-    currentPreviewImage: 'https://imgur.com/iOeUBV7.png',
-    showHeartBeatSection: false
+    currentPreviewImagePos: 0,
+    currentSelectedFeature: 0,
+  }
+
+  onColorOptionClick = (pos) => {
+    this.setState({currentPreviewImagePos: pos});
+  }
+
+  onFeatureItemClick = (pos) => {
+    this.setState({currentSelectedFeature: pos});
+  }
+
+  // If current value is changed than update state
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextState.currentPreviewImagePos === this.state.currentPreviewImagePos) {
+      return false
+    }
+
+    return true
   }
 
   render() {
@@ -20,13 +37,23 @@ class App extends Component {
             <div className={classes.MainContainer}>
                 <div className={classes.ProductPreview}>
                     <ProductPreview
-                        currentPreviewImage={this.state.currentPreviewImage}
-                        showHeartBeatSection={this.state.showHeartBeatSection}
+                        currentPreviewImage={
+                            this.state.productData.colorOptions[
+                                this.state.currentPreviewImagePos
+                            ].imageUrl
+                        }
+                        currentSelectedFeature={this.state.currentSelectedFeature}
                     />
                 </div>
 
                 <div className={classes.ProductData}>
-                    <ProductDetails data={this.state.productData} />
+                    <ProductDetails
+                        data={this.state.productData}
+                        onColorOptionClick={this.onColorOptionClick}
+                        currentPreviewImagePos={this.state.currentPreviewImagePos}
+                        onFeatureItemClick={this.onFeatureItemClick}
+                        currentSelectedFeature={this.state.currentSelectedFeature}
+                    />
                 </div>
             </div>
         </div>
