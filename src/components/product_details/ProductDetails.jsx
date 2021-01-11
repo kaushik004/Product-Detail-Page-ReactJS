@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../ProductDetails.module.css';
+import classes from './ProductDetails.module.css';
 
 const ProductDetails = (props) => {
     const colorOptions = props.data.colorOptions.map((item, pos) => {

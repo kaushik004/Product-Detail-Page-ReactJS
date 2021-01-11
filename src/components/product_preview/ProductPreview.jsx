@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../ProductPreview.module.css'
+import classes from './ProductPreview.module.css'
 
 const ProductPreview = (props) => {
     const currentHour = new Date().getHours() > 9 ? new Date().getHours() : '0' + new Date().getHours();
