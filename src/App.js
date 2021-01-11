@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './App.module.css';
 import ProductPreview from './components/ProductPreview'
 import ProductDetails from './components/ProductDetails';
 import TopBar from './components/TopBar';
+import ProductData from './ProductData';
 
-function App() {
-  return (
-    <div className="App">
-      <TopBar />
+class App extends Component {
+  state = {
+    productData: ProductData,
+    currentPreviewImage: 'https://imgur.com/iOeUBV7.png',
+    showHeartBeatSection: false
+  }
 
-      <div className={classes.MainContainer}>
-        <div className={classes.ProductPreview}>
-          <ProductPreview />
+  render() {
+    return (
+        <div className="App">
+            <TopBar />
+
+            <div className={classes.MainContainer}>
+                <div className={classes.ProductPreview}>
+                    <ProductPreview
+                        currentPreviewImage={this.state.currentPreviewImage}
+                        showHeartBeatSection={this.state.showHeartBeatSection}
+                    />
+                </div>
+
+                <div className={classes.ProductData}>
+                    <ProductDetails data={this.state.productData} />
+                </div>
+            </div>
         </div>
-        
-        <div className={classes.ProductData}>
-          <ProductDetails />
-        </div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
